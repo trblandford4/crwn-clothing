@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 
-import MenuItem from "../MenuItem/MenuItem.component";
+import MenuItem from "../menuItem/MenuItem.component.jsx";
 
 import "./Directory.styles.scss";
 
