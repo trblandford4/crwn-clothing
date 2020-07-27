@@ -4,6 +4,7 @@ import "./SignIn.styles.scss";
 
 import FormInput from "../form-input/FormInput.component";
 import CustomButton from "../custom-button/CustomButton.component";
+import { signInWithGoogle } from "../../firebase/firebase.utils";
 
 class SignIn extends PureComponent {
   constructor(props) {
@@ -50,8 +51,12 @@ class SignIn extends PureComponent {
             handleChange={this.handleChange}
             required
           />
-
-          <CustomButton type="submit">SIGN IN</CustomButton>
+          <div className="buttons">
+            <CustomButton type="submit">SIGN IN</CustomButton>
+            <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
+              SIGN IN WITH GOOGLE
+            </CustomButton>
+          </div>
         </form>
       </div>
     );
