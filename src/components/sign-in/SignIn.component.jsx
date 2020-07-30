@@ -1,10 +1,13 @@
 import React, { PureComponent } from "react";
 
-import "./SignIn.styles.scss";
-
 import FormInput from "../form-input/FormInput.component";
 import CustomButton from "../custom-button/CustomButton.component";
 import { signInWithGoogle, auth } from "../../firebase/firebase.utils";
+import {
+  SignInContainer,
+  SignInTitle,
+  ButtonsBarContainer,
+} from "./SignIn.styles";
 
 class SignIn extends PureComponent {
   constructor(props) {
@@ -39,39 +42,35 @@ class SignIn extends PureComponent {
     const { email, password } = this.state;
 
     return (
-      <div className="sign-in">
-        <h2>I already have an account</h2>
+      <SignInContainer>
+        <SignInTitle>I already have an account</SignInTitle>
         <span>Sign in with your email and password</span>
 
         <form onSubmit={this.handleSubmit}>
           <FormInput
             name="email"
             type="email"
-            label="email"
-            value={email}
             handleChange={this.handleChange}
+            value={email}
+            label="email"
             required
           />
           <FormInput
             name="password"
             type="password"
-            label="password"
             value={password}
             handleChange={this.handleChange}
+            label="password"
             required
           />
-          <div className="buttons">
-            <CustomButton type="submit">SIGN IN</CustomButton>
-            <CustomButton
-              type="button"
-              onClick={signInWithGoogle}
-              isGoogleSignIn
-            >
-              SIGN IN WITH GOOGLE
+          <ButtonsBarContainer>
+            <CustomButton type="submit"> Sign in </CustomButton>
+            <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
+              Sign in with Google
             </CustomButton>
-          </div>
+          </ButtonsBarContainer>
         </form>
-      </div>
+      </SignInContainer>
     );
   }
 }
