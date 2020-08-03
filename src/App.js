@@ -5,12 +5,12 @@ import { createStructuredSelector } from "reselect";
 
 import "./App.css";
 
+import HeaderContainer from "./components/header/Header.container";
 import HomePage from "./pages/homepage/HomePage.component.jsx";
 import ShopPage from "./pages/shop/Shop.component.jsx";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/SignInAndSignUp.component";
-import CheckoutPage from "./pages/checkout/Checkout.component";
+import CheckoutPageContainer from "./pages/checkout/Checkout.container";
 
-import Header from "./components/header/Header.component";
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import { setCurrentUser } from "./redux/user/user.actions";
 import { selectCurrentUser } from "./redux/user/user.selectors";
@@ -50,11 +50,11 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Header />
+        <HeaderContainer />
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/shop" component={ShopPage} />
-          <Route exact path="/checkout" component={CheckoutPage} />
+          <Route exact path="/checkout" component={CheckoutPageContainer} />
           <Route
             exact
             path="/signin"
