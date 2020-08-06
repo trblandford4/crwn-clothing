@@ -1,13 +1,12 @@
 import React, { PureComponent } from "react";
 
-import FormInput from "../form-input/FormInput.component";
-import CustomButton from "../custom-button/CustomButton.component";
-import { signInWithGoogle, auth } from "../../firebase/firebase.utils";
 import {
   SignInContainer,
   SignInTitle,
   ButtonsBarContainer,
 } from "./SignIn.styles";
+import FormInput from "../form-input/FormInput.component";
+import CustomButton from "../custom-button/CustomButton.component";
 
 class SignIn extends PureComponent {
   constructor(props) {
@@ -21,15 +20,10 @@ class SignIn extends PureComponent {
 
   handleSubmit = async (event) => {
     event.preventDefault();
-
+    const { emailSignInStart } = this.props;
     const { email, password } = this.state;
 
-    try {
-      await auth.signInWithEmailAndPassword(email, password);
-      this.setState({ email: "", password: "" });
-    } catch (error) {
-      console.log("error signing in", error.message);
-    }
+    emailSignInStart(email, password);
   };
 
   handleChange = (event) => {
@@ -39,6 +33,7 @@ class SignIn extends PureComponent {
   };
 
   render() {
+    const { googleSignInStart } = this.props;
     const { email, password } = this.state;
 
     return (
@@ -65,7 +60,11 @@ class SignIn extends PureComponent {
           />
           <ButtonsBarContainer>
             <CustomButton type="submit"> Sign in </CustomButton>
-            <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
+            <CustomButton
+              type="button"
+              onClick={googleSignInStart}
+              isGoogleSignIn
+            >
               Sign in with Google
             </CustomButton>
           </ButtonsBarContainer>

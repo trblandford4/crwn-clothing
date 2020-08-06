@@ -5,11 +5,9 @@ import "./App.css";
 
 import HeaderContainer from "./components/header/Header.container";
 import HomePage from "./pages/homepage/HomePage.component.jsx";
-import ShopPage from "./pages/shop/Shop.component.jsx";
+import ShopPageContainer from "./pages/shop/Shop.container.jsx";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/SignInAndSignUp.component";
 import CheckoutPageContainer from "./pages/checkout/Checkout.container";
-
-import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 
 class App extends PureComponent {
   constructor(props) {
@@ -23,20 +21,8 @@ class App extends PureComponent {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    const { setCurrentUser } = this.props;
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-      if (userAuth !== null) {
-        const userRef = await createUserProfileDocument(userAuth);
-
-        userRef.onSnapshot((snapshot) => {
-          setCurrentUser({
-            id: snapshot.id,
-            ...snapshot.data(),
-          });
-        });
-      }
-      setCurrentUser(userAuth);
-    });
+    const { checkUserSession } = this.props;
+    checkUserSession();
   }
 
   componentWillUnmount() {
@@ -49,7 +35,7 @@ class App extends PureComponent {
         <HeaderContainer />
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route path="/shop" component={ShopPage} />
+          <Route path="/shop" component={ShopPageContainer} />
           <Route exact path="/checkout" component={CheckoutPageContainer} />
           <Route
             exact

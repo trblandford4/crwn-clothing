@@ -10,9 +10,8 @@ import {
 } from "./Header.styles";
 import CartIconContainer from "../cart-icon/CartIcon.container";
 import CartDropdownContainer from "../cart-dropdown/CartDropdown.container";
-import { auth } from "../../firebase/firebase.utils";
 
-const Header = ({ currentUser, hidden }) => {
+const Header = ({ currentUser, hidden, signOutStart }) => {
   return (
     <HeaderContainer>
       <LogoContainer to="/">
@@ -22,7 +21,7 @@ const Header = ({ currentUser, hidden }) => {
         <OptionLink to="/shop">SHOP</OptionLink>
         <OptionLink to="/contact">CONTACT</OptionLink>
         {currentUser ? (
-          <OptionLink as="div" onClick={() => auth.signOut()}>
+          <OptionLink as="div" onClick={signOutStart}>
             SIGN OUT
           </OptionLink>
         ) : (
